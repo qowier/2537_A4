@@ -82,7 +82,7 @@ const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
   const selectedPokemons = pokemons.slice(startIdx, endIdx);
 
   $('#pokeCards').empty();
-  pokemons.forEach(async (pokemon) => {
+  selectedPokemons.forEach(async (pokemon) => {
     const res = await axios.get(pokemon.url);
     $('#pokeCards').append(`
       <div class="pokeCard card" pokeName=${res.data.name}>
