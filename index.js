@@ -1,4 +1,4 @@
-const PAGE_SIZE = 10
+const PAGE_SIZE = 12;
 let currentPage = 1;
 let pokemons = []
 
@@ -82,7 +82,7 @@ const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
   const selectedPokemons = pokemons.slice(startIdx, endIdx);
 
   $('#pokeCards').empty();
-  selectedPokemons.forEach(async (pokemon) => {
+  pokemons.forEach(async (pokemon) => {
     const res = await axios.get(pokemon.url);
     $('#pokeCards').append(`
       <div class="pokeCard card" pokeName=${res.data.name}>
@@ -110,6 +110,7 @@ const setup = async () => {
   pokemons = response.data.results;
 
   await fetchPokemonTypes();
+  pokemons.sort((a, b) => a.id - b.id);
   paginate(currentPage, PAGE_SIZE, pokemons)
   const numPages = Math.ceil(pokemons.length / PAGE_SIZE)
   updatePaginationDiv(currentPage, numPages)
