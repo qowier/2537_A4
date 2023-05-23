@@ -8,6 +8,9 @@ const setup = () => {
   let matchedPairs = 0; // Number of matched pairs
   const totalPairs = $(".card").length / 2; // Total number of pairs
 
+  //Hide game grid on load
+  $("#game_grid").hide();
+
   //Populate pokemon based on random selection
   const cardElements = $(".card"); // Get all the card elements
 
@@ -50,6 +53,7 @@ const setup = () => {
 
   $("#start").on("click", function () {
     console.log("start clicked");
+    $("#game_grid").show();
     createTimer();
     $(".card").on(("click"), function () {
       // Update the number of flipped cards
@@ -185,6 +189,9 @@ const setup = () => {
     $("#clicks").text("Clicks: 0");
     $("#timer").text("Time: 0s");
     $("#matchedPairs").text("Matched: 0");
+
+    //Hide game grid on load
+    $("#game_grid").hide();
 
     //Reroll pokemon
     fetchRandomPokemon();
