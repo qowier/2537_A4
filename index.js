@@ -5,9 +5,12 @@ const setup = () => {
   let clicksCount = 0; // Keep track of the number of clicks
   let timer = 0; // Keep track of the time elapsed
   let timerInterval = null; // Reference to the interval for updating the timer
+  let matchedPairs = 0; // Number of matched pairs
+  const totalPairs = $(".card").length / 2; // Total number of pairs
 
   //Start setup with cards unclickable
   $(".card").off("click");
+  $("#totalPairs").text(`Total Pairs: ${totalPairs}`);
 
   $("#start").on("click", function () {
     console.log("start clicked");
@@ -75,6 +78,8 @@ const setup = () => {
       console.log("match");
       $(`#${firstCard.id}`).parent().addClass("matched");
       $(`#${secondCard.id}`).parent().addClass("matched");
+      matchedPairs = $(".card.matched").length / 2;
+      $("#matchedPairs").text(`Matched: ${matchedPairs}`);
     } else {
       console.log("no match");
       setTimeout(() => {
@@ -102,7 +107,6 @@ const setup = () => {
   function resetGame() {
     // Clear the timer interval
     clearInterval(timerInterval);
-    timerInterval = null;
 
     // Reset all the necessary variables and elements
     firstCard = undefined;
@@ -110,16 +114,17 @@ const setup = () => {
     flippedCards = 0;
     clicksCount = 0;
     timer = 0;
+    timerInterval = null;
+    matchedPairs = 0;
 
     // Reset cards flips
     $(".card").removeClass("flip");
     $(".card").removeClass("matched");
 
-    // Reset click count
+    // Reset display values of click count and timer
     $("#clicks").text("Clicks: 0");
-
-    // Reset timer
     $("#timer").text("Time: 0s");
+    $("#matchedPairs").text("Matched: 0");
   }
 };
 
