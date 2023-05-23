@@ -98,7 +98,7 @@ const setup = () => {
         clearInterval(timerInterval); // Stop the timer
         setTimeout(() => {
           alert(`Congratulations! You won in ${timer} seconds with ${clicksCount} clicks.`);
-        }, 750);}
+        }, 500);}
     });
   });
 
