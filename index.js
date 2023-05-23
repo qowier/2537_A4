@@ -8,6 +8,42 @@ const setup = () => {
   let matchedPairs = 0; // Number of matched pairs
   const totalPairs = $(".card").length / 2; // Total number of pairs
 
+  //Populate pokemon based on random selection
+  const cardElements = $(".card"); // Get all the card elements
+
+  const fetchRandomPokemon = async () => {
+    try {
+      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=12"); // Fetch double the number of required Pokémon
+      const data = await response.json();
+      const pokemonList = data.results;
+
+      // Select unique pairs from the fetched list
+      const selectedPokemon = [];
+      while (selectedPokemon.length < cardElements.length / 2) {
+        const randomIndex = Math.floor(Math.random() * pokemonList.length);
+        const randomPokemon = pokemonList[randomIndex];
+
+        if (!selectedPokemon.includes(randomPokemon)) {
+          selectedPokemon.push(randomPokemon);
+        }
+      }
+
+      // Loop through each card element and set a random Pokemon image
+      cardElements.each((index, card) => {
+        const frontFaceImg = $(card).find(".front_face");
+        const pokemonIndex = Math.floor(index / 2); // Divide the index by 2 to match the selected Pokémon index
+        const selected = selectedPokemon[pokemonIndex];
+
+        // Set the src attribute of the front_face image to the selected Pokemon's image URL
+        frontFaceImg.attr("src", `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selected.url.split("/")[6]}.png`);
+      });
+    } catch (error) {
+      console.error("Error fetching Pokemon data:", error);
+    }
+  };
+
+  fetchRandomPokemon();
+
   //Start setup with cards unclickable
   $(".card").off("click");
   $("#totalPairs").text(`Total Pairs: ${totalPairs}`);
@@ -137,6 +173,9 @@ const setup = () => {
     $("#clicks").text("Clicks: 0");
     $("#timer").text("Time: 0s");
     $("#matchedPairs").text("Matched: 0");
+
+    //Reroll pokemon
+    fetchRandomPokemon();
   }
 };
 
