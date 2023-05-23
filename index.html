@@ -9,10 +9,17 @@
   <link rel="stylesheet" href="index.css">
   <!-- import jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="index.js"></script>
 </head>
 
 <body>
+  <div id="header">
+    <h1>Memory Game</h1>
+    <button id="start">Start</button>
+    <button id="reset">Reset</button>
+    <h2 id="clicks">Clicks: 0</h2>
+    <h2 id="timer">Time: 0s</h2>
+  </div>
+
   <div id="game_grid">
     <div class="card">
       <img id="img1" class="front_face" src="001.png" alt="">
@@ -41,4 +48,5 @@
   </div>
 </body>
 
+<script src="index.js"></script>
 </html>

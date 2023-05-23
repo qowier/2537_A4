@@ -2,6 +2,10 @@ const setup = () => {
   let firstCard = undefined;
   let secondCard = undefined;
   let flippedCards = 0; // Keep track of the number of flipped cards
+  let clicksCount = 0; // Keep track of the number of clicks
+  let timer = 0; // Keep track of the time elapsed
+  let timerCreated = false;  // Keep track of whether the timer has been created
+
 
   $(".card").on(("click"), function () {
     // Corner case 1: If the user clicks on the same card twice, do nothing
@@ -24,6 +28,13 @@ const setup = () => {
 
     $(this).toggleClass("flip");
     flippedCards += 1;
+
+    //Update click count
+    clicksCount += 1;
+    $("#clicks").text(`Clicks: ${clicksCount}`);
+
+    //Create timer if timer is not created.
+    createTimer();
 
     if (!firstCard) {
       firstCard = $(this).find(".front_face")[0];
@@ -52,7 +63,21 @@ const setup = () => {
       }
     }
   });
-}
 
+  // Create singleton timer
+  function createTimer() {
+    if (!timerCreated) {
+      console.log("Timer is created.");
+      setInterval(updateTimer, 1000);
+      timerCreated = true;
+    }
+  }
+
+  // Helper to update timer
+  function updateTimer() {
+    timer++;
+    $('#timer').text(`Time: ${timer}s`);
+  }
+}
 
 $(document).ready(setup);
