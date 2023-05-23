@@ -72,6 +72,18 @@ const setup = () => {
     resetGame();
   });
 
+  // Event listener for the white theme button
+  $("#whiteThemeBtn").on("click", function() {
+    $("body").removeClass("black-theme");
+    $("body").addClass("white-theme");
+  });
+
+  // Event listener for the black theme button
+  $("#blackThemeBtn").on("click", function() {
+    $("body").removeClass("white-theme");
+    $("body").addClass("black-theme");
+  });
+
   //Checks if cards are matching
   function checkMatch(firstCard, secondCard) {
     if (firstCard && secondCard && firstCard.src == secondCard.src) {
