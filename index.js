@@ -52,7 +52,15 @@ const setup = () => {
         firstCard = undefined;
         secondCard = undefined; 
       }
-    });  
+      // Check if all cards have been matched
+      if ($(".card.matched").length === $(".card").length) {
+        console.log("Win condition checked");
+        // All cards have been matched, display win alert
+        clearInterval(timerInterval); // Stop the timer
+        setTimeout(() => {
+          alert(`Congratulations! You won in ${timer} seconds with ${clicksCount} clicks.`);
+        }, 750);}
+    });
   });
 
   $("#reset").on("click", function () {
@@ -60,7 +68,7 @@ const setup = () => {
     $(".card").off("click");
     resetGame();
   });
-  
+
   //Checks if cards are matching
   function checkMatch(firstCard, secondCard) {
     if (firstCard && secondCard && firstCard.src == secondCard.src) {
