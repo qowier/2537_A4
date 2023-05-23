@@ -6,6 +6,7 @@ const setup = () => {
   let timer = 0; // Keep track of the time elapsed
   let timerInterval = null; // Reference to the interval for updating the timer
   let matchedPairs = 0; // Number of matched pairs
+  let pairsLeft = totalPairs - matchedPairs; // Number of pairs left to match
   const totalPairs = $(".card").length / 2; // Total number of pairs
 
   //Hide game grid on load
@@ -132,6 +133,8 @@ const setup = () => {
       $(`#${secondCard.id}`).parent().addClass("matched");
       matchedPairs = $(".card.matched").length / 2;
       $("#matchedPairs").text(`Matched: ${matchedPairs}`);
+      pairsLeft = totalPairs - matchedPairs;
+      $("#pairsLeft").text(`Pairs Left: ${pairsLeft}`);
       powerUp();
     } else {
       console.log("no match");
