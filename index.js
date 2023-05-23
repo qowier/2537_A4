@@ -128,6 +128,7 @@ const setup = () => {
       $(`#${secondCard.id}`).parent().addClass("matched");
       matchedPairs = $(".card.matched").length / 2;
       $("#matchedPairs").text(`Matched: ${matchedPairs}`);
+      powerUp();
     } else {
       console.log("no match");
       setTimeout(() => {
@@ -135,6 +136,17 @@ const setup = () => {
         $(`#${secondCard.id}`).parent().toggleClass("flip");
       }, 1000);
     }
+  }
+
+  // Reveal all cards for a short period of time
+  function powerUp() {
+    console.log("power up!");
+    $(".card:not(.matched)").addClass("flip");
+
+    // Set a timeout to remove the flip class after a short period of time
+    setTimeout(function () {
+      $(".card:not(.matched)").removeClass("flip");
+    }, 1000);
   }
 
   // Create singleton timer
