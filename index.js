@@ -6,8 +6,9 @@ const setup = () => {
   let timer = 0; // Keep track of the time elapsed
   let timerInterval = null; // Reference to the interval for updating the timer
   let matchedPairs = 0; // Number of matched pairs
-  let pairsLeft = totalPairs - matchedPairs; // Number of pairs left to match
   const totalPairs = $(".card").length / 2; // Total number of pairs
+  let pairsLeft = 0; // Number of pairs left to match
+
 
   //Hide game grid on load
   $("#game_grid").hide();
@@ -51,6 +52,8 @@ const setup = () => {
   //Start setup with cards unclickable
   $(".card").off("click");
   $("#totalPairs").text(`Total Pairs: ${totalPairs}`);
+  $("#pairsLeft").text(`Pairs Left: ${pairsLeft}`);
+
 
   $("#start").on("click", function () {
     console.log("start clicked");
@@ -192,6 +195,8 @@ const setup = () => {
     $("#clicks").text("Clicks: 0");
     $("#timer").text("Time: 0s");
     $("#matchedPairs").text("Matched: 0");
+    $("#pairsLeft").text("Matched: 0");
+
 
     //Hide game grid on load
     $("#game_grid").hide();
